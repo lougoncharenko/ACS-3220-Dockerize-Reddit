@@ -1,0 +1,17 @@
+<div class="row mt-3">
+  <div class="col-sm-6 col-sm-offset-3">
+    <a href="{{post.url}}" class="lead">{{post.title}}</a>
+    <p>by {{post.author.username}}</p>
+    <p>{{post.summary}}</p>
+    <h4>Comments:</h4>
+    {{#each post.comments}}
+      {{> comment comment=this postId=../post._id}}
+    {{/each}}
+    <form action="/posts/{{post._id}}/comments" method="post">
+      <textarea class='form-control' name="content" placeholder="Comment"></textarea>
+      <div class="text-right">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
