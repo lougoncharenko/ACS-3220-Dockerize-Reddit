@@ -21,6 +21,6 @@ services:
       DB_NAME: sample-db
     depends_on:
       - mongo_db
-
+      
 volumes:
   mongo_data: {}

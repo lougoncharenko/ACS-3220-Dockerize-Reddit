@@ -7,7 +7,7 @@ mongoose.connect(
     url,
     {
       dbName: process.env.DB_NAME,
-      useNewUrlParser: true, useUnifiedTopology: true,
+      useNewUrlParser: true, useUnifiedTopology: true, authSource: "admin"
     },
     (err) => {
       assert.equal(null, err);
