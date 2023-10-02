@@ -1,7 +1,6 @@
 version: '3.9'
 
 services:
-  # Mongodb service
   mongo_db:
     container_name: database_container
     image: mongo:latest
@@ -9,11 +8,9 @@ services:
     volumes:
       - mongo_data:/data/db
 
-  # Node api service
   reddit-clone:
     build: .
     ports:
-      # local->container
       - 4000:4000
     environment:
       PORT: 4000
@@ -21,6 +18,6 @@ services:
       DB_NAME: sample-db
     depends_on:
       - mongo_db
-      
+
 volumes:
   mongo_data: {}
