@@ -36,12 +36,13 @@ module.exports = (app) => {
         post.upVotes = [];
         post.downVotes = [];
         post.voteScore = 0;
+        const sanitizedString = req.sanitize(post.propertyToSanitize);
   
-        post
+        sanitizedString
           .save()
           .then(() => User.findById(userId))
           .then((user) => {
-            user.posts.unshift(post);
+            user.posts.unshift(sanitizedString);
             user.save();
             // REDIRECT TO THE NEW POST
             return res.redirect(`/post-show/${post._id}`);

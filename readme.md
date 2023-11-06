@@ -24,11 +24,11 @@ Run the following commands:
 
 ### 3. Check instance on local host
 ```
-http://localhost:3000
+http://localhost:4400
 ```
 
 
 ### 4. Stopping the App with Docker Compose
 ```
 docker-compose down
-```
+```  

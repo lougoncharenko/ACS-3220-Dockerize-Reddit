@@ -39,13 +39,15 @@ module.exports = (app) => {
   app.post('/posts/:postId/comments', (req, res) => {
     const comment = new Comment(req.body);
     comment.author = req.user._id;
-    comment
+    const sanitizedString = req.sanitize(comment.propertyToSanitize);
+    
+    sanitizedString
       .save()
       .then(() => Promise.all([
         Post.findById(req.params.postId),
       ]))
       .then(([post]) => {
-        post.comments.unshift(comment);
+        post.comments.unshift(sanitizedString);
         return Promise.all([
           post.save(),
         ]);

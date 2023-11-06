@@ -1,5 +1,6 @@
 const express =  require('express');
 const checkAuth = require('./middleware/checkAuth');
+const expressSanitizer = require('express-sanitizer');
 require('dotenv').config();
 const { engine } =  require('express-handlebars');
 const cookieParser = require('cookie-parser');
@@ -9,6 +10,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(checkAuth);
 app.use(express.static('public'));
+// Mount express-sanitizer middleware here
+app.use(expressSanitizer());
 require('./controllers/auth.js')(app);
 require('./controllers/posts')(app);
 require('./controllers/comments.js')(app);
@@ -31,6 +34,6 @@ app.get('/posts/new', (req, res) => {
   res.render('posts-new', {});
 });
 
-app.listen(4000);
+app.listen(4400);
 
 module.exports = app;

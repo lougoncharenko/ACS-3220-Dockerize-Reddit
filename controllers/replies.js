@@ -26,12 +26,13 @@ app.post('/posts/:postId/comments/:commentId/replies', (req, res) => {
     const reply = new Comment(req.body);
     console.log(req.body)
     reply.author = req.user._id;
+    const sanitizedString = req.sanitize(reply.propertyToSanitize);
     // LOOKUP THE PARENT POST
     Post.findById(req.params.postId)
       .then((post) => {
         // FIND THE CHILD COMMENT
         Promise.all([
-          reply.save(),
+          sanitizedString.save(),
           Comment.findById(req.params.commentId),
         ])
           .then(([reply, comment]) => {
